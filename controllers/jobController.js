@@ -18,7 +18,7 @@ exports.getJobs = async (req, res) => {
 // Function to create a new job listing
 exports.createJob = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const { title, company, location, description } = req.body;
     // console.log(title+" "+company+" "+location+" "+description);
     const newJob=new Job({
@@ -27,7 +27,7 @@ exports.createJob = async (req, res) => {
       location,
       description,
     });
-    const newListing=newJob.save();
+    const newListing=await newJob.save();
     res.status(201).json(newListing);
     // TODO: Define the logic to create a new job listing based on the provided data
     // TODO: Save the new job listing to the database
@@ -54,7 +54,7 @@ exports.applyForJob = async (req, res) => {
         applicantEmail,
         coverLetter,
       });
-      const newApplication=newJobApplication.save();
+      const newApplication=await newJobApplication.save();
       res.status(201).json({message:'New Job application Created'});
     }
     // TODO: Retrieve the job listing with the given 'jobId' from the database
